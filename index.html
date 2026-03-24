@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PARTY PLAY | Cine & Series</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <style>
+        :root { 
+            --primary: #ff2d75; 
+            --bg: #0a0a0b; 
+            --card-bg: #161618; 
+            --text: #ffffff;
+        }
+
+        body { 
+            margin: 0; padding: 0; background: var(--bg); color: var(--text); 
+            font-family: 'Poppins', sans-serif; overflow-x: hidden;
+        }
+
+        /* HEADER FLOTANTE */
+        header { 
+            position: fixed; top: 0; width: 100%; padding: 15px 5%;
+            display: flex; align-items: center; z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+            transition: 0.4s;
+        }
+        .logo-box {
+            background: var(--primary); padding: 6px 15px; border-radius: 6px;
+            box-shadow: 0 0 20px rgba(255, 45, 117, 0.4);
+        }
+        .logo-img { height: 30px; }
+
+        .search-container { margin-left: 20px; flex-grow: 1; max-width: 400px; }
+        .search-bar { 
+            width: 100%; padding: 10px 20px; border-radius: 50px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);
+            color: white; outline: none;
+        }
+
+        /* BANNER PRINCIPAL (Slider) */
+        .hero-wrapper { width: 100%; height: 85vh; position: relative; }
+        .main-slider { height: 100%; }
+        .swiper-slide-hero { position: relative; overflow: hidden; background: #000; }
+        .hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
+        
+        /* Animación Ken Burns (Zoom lento) */
+        .swiper-slide-active .hero-img { animation: kenburns 10s ease-out forwards; }
+        @keyframes kenburns { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
+
+        .hero-overlay { 
+            position: absolute; inset: 0; 
+            background: linear-gradient(to top, var(--bg) 5%, transparent 60%); 
+        }
+        .hero-info { 
+            position: absolute; bottom: 15%; left: 5%; z-index: 10; 
+            max-width: 600px; animation: fadeInUp 1s ease;
+        }
+        .hero-info h2 { font-family: 'Orbitron'; font-size: clamp(2rem, 5vw, 4rem); margin: 0 0 20px; }
+        .btn-play { 
+            background: var(--primary); color: white; padding: 12px 30px; border-radius: 4px;
+            text-decoration: none; font-weight: bold; font-family: 'Orbitron';
+        }
+
+        /* LISTADOS DE PELÍCULAS (Estilo Copiado) */
+        .row-title { 
+            font-family: 'Orbitron'; font-size: 1.1rem; margin: 40px 0 15px 5%; 
+            color: #eee; letter-spacing: 1px; 
+        }
+
+        .listado-container { 
+            padding: 0 5% !important; 
+            overflow: visible !important; /* Importante para el zoom */
+        }
+
+        .movie-card {
+            width: 170px; /* Ancho profesional */
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+        }
+
+        /* El famoso efecto zoom al pasar el ratón */
+        .movie-card:hover { 
+            transform: scale(1.15); 
+            z-index: 100; 
+        }
+
+        .poster-container {
+            width: 100%; aspect-ratio: 2/3; border-radius: 6px;
+            overflow: hidden; border: 1px solid #222;
+        }
+        .poster-container img { width: 100%; height: 100%; object-fit: cover; }
+
+        .movie-info { padding: 8px 0; font-size: 0.8rem; text-align: center; }
+        .movie-info span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+        /* Pantalla de carga */
+        #loading { text-align: center; padding: 200px 0; font-family: 'Orbitron'; color: var(--primary); font-size: 1.5rem; }
+
+        @media (max-width: 768px) {
+            .movie-card { width: 135px; }
+            .hero-wrapper { height: 60vh; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="navbar">
+        <div class="logo-box">
+            <img src="https://i.postimg.cc/7hgdMS6K/Picsart-24-08-01-00-13-45-109.png" class="logo-img">
+        </div>
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-bar" placeholder="Buscar..." onkeyup="filterAll()">
+        </div>
+    </header>
+
+    <div id="loading">CARGANDO PARTY PLAY...</div>
+
+    <div id="app" style="display:none">
+        <div class="hero-wrapper">
+            <div class="swiper main-slider">
+                <div class="swiper-wrapper" id="sliderContent"></div>
+            </div>
+        </div>
+
+        <main id="sections" style="padding-bottom: 80px;"></main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        async function init() {
+            try {
+                const r = await fetch('datos.json?v=' + Math.random());
+                const data = await r.json();
+                renderWeb(data);
+            } catch (e) { document.getElementById('loading').innerText = "ERROR AL CONECTAR"; }
+        }
+
+        function renderWeb(pelis) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('app').style.display = 'block';
+
+            // 1. Slider Superior
+            const destacados = pelis.filter(p => p.enSlider === true);
+            const sliderContent = destacados.length > 0 ? destacados : pelis.slice(0, 5);
+
+            document.getElementById('sliderContent').innerHTML = sliderContent.map(p => `
+                <div class="swiper-slide swiper-slide-hero">
+                    <img src="${p.img}" class="hero-img">
+                    <div class="hero-overlay"></div>
+                    <div class="hero-info">
+                        <h2>${p.titulo}</h2>
+                        <a href="${p.url}" class="btn-play">▶ VER AHORA</a>
+                    </div>
+                </div>
+            `).join('');
+
+            new Swiper('.main-slider', { loop: true, effect: 'fade', autoplay: { delay: 6000 }, speed: 1000 });
+
+            // 2. Filas de Películas con Movimiento Inercial
+            const main = document.getElementById('sections');
+            const categorias = [...new Set(pelis.flatMap(p => p.etiquetas || ["Nuevos"]))].sort();
+
+            categorias.forEach((cat, idx) => {
+                const filtradas = pelis.filter(p => (p.etiquetas || []).includes(cat));
+                if(filtradas.length === 0) return;
+
+                const row = document.createElement('div');
+                row.className = "category-row";
+                row.innerHTML = `
+                    <h2 class="row-title">${cat}</h2>
+                    <div class="swiper listado-container" id="row-${idx}">
+                        <div class="swiper-wrapper">
+                            ${filtradas.map(p => `
+                                <div class="swiper-slide movie-card" data-title="${p.titulo}">
+                                    <a href="${p.url}" style="text-decoration:none; color:white;">
+                                        <div class="poster-container">
+                                            <img src="${p.img}" loading="lazy">
+                                        </div>
+                                        <div class="movie-info">
+                                            <span>${p.titulo}</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                main.appendChild(row);
+
+                // Configuración de movimiento "Tipo Streaming"
+                new Swiper(`#row-${idx}`, { 
+                    slidesPerView: 'auto', 
+                    spaceBetween: 12, 
+                    freeMode: {
+                        enabled: true,
+                        momentumRatio: 0.5, // Inercia suave al soltar
+                    },
+                    grabCursor: true,
+                    mousewheel: { forceToAxis: true }
+                });
+            });
+        }
+
+        // Buscador
+        function filterAll() {
+            const q = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.movie-card').forEach(c => {
+                const match = c.dataset.title.toLowerCase().includes(q);
+                c.style.display = match ? "block" : "none";
+            });
+            document.querySelectorAll('.category-row').forEach(row => {
+                const hasVisible = row.querySelectorAll('.movie-card[style="display: block"]').length > 0;
+                row.style.display = (q === "" || hasVisible) ? "block" : "none";
+            });
+        }
+
+        // Efecto Navbar Scroll
+        window.onscroll = () => {
+            const nav = document.getElementById('navbar');
+            nav.style.background = window.scrollY > 50 ? "rgba(10,10,11,0.95)" : "linear-gradient(to bottom, rgba(0,0,0,0.9), transparent)";
+        };
+
+        window.onload = init;
+    </script>
+</body>
+</html>
