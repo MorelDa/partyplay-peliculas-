@@ -288,5 +288,46 @@
     ],
     "sinopsis": "Con un mundo retrofuturista inspirado en los años 60 como telón de fondo, la Primera Familia de Marvel deberá hacer frente a su mayor desafío hasta la fecha. Obligados a buscar el equilibrio entre su papel de héroes y sus fuertes vínculos familiares, tendrán que defender la Tierra de un hambriento dios espacial llamado Galactus y su intrigante heraldo, Estela Plateada.",
     "enSlider": true
+  },
+  {
+    "tipo": "pelicula",
+    "titulo": "La propuesta",
+    "img": "https://media.themoviedb.org/t/p/w300_and_h450_face/bkbzlLA8HCEHRDxsTKGthII0BpW.jpg",
+    "url": "https://morelda.github.io/La-Propuesta/",
+    "year": "2009",
+    "etiquetas": [
+      "Comedia",
+      "Romance",
+      "Drama"
+    ],
+    "sinopsis": "Margaret es una poderosa y estricta editora de gran éxito de Nueva York que, por un problema con su visado, de repente se enfrenta a ser deportada a Canadá, su país de origen. Para evitarlo y poder mantener su visa en Estados Unidos, la astuta ejecutiva declara que está comprometida con su joven asistente Andrew, al que lleva torturando durante años. Andrew acepta participar en la farsa, pero con algunas condiciones. La \"pareja\" se dirige entonces a Alaska a conocer la peculiar familia de él, y la ejecutiva de ciudad, acostumbrada a tener todo bajo control, se encuentra inmersa en situaciones surrealistas que escapan a cualquier lógica conocida. Con planes de boda en camino y un agente de inmigración tras sus pasos, Margaret y Andrew se comprometen a seguir con el plan previsto pese a las consecuencias.",
+    "enSlider": true
+  },
+  {
+    "tipo": "pelicula",
+    "titulo": "Zeta",
+    "img": "https://media.themoviedb.org/t/p/w300_and_h450_face/tEFMZGcmxBDCodbLAqmrjdjCTwm.jpg",
+    "url": "https://morelda.github.io/zeta/",
+    "year": "2026",
+    "etiquetas": [
+      "Drama",
+      "Suspense"
+    ],
+    "sinopsis": "Cuatro ex-oficiales de inteligencia españoles son asesinados al mismo tiempo en distintas embajadas del mundo. El CNI descubre que todos participaron hace 35 años en la oculta “Operación Ciénaga”, que ocurrió en Colombia y donde un quinto oficial de inteligencia –el único que ha escapado de los asesinos– estuvo implicado. Encontrarle será el primer objetivo para el CNI, que pone al frente de la misión a su mejor miembro: Zeta.",
+    "enSlider": true
+  },
+  {
+    "tipo": "pelicula",
+    "titulo": "A Costa Rican Wedding",
+    "img": "https://media.themoviedb.org/t/p/w300_and_h450_face/vEhmBiyYcmi12eISpjQVtW30qz8.jpg",
+    "url": "https://morelda.github.io/Amor-en-Costa-Rica/",
+    "year": "2025",
+    "etiquetas": [
+      "Aventura",
+      "Comedia",
+      "Romance"
+    ],
+    "sinopsis": "A clumsy maid of honor gets help from her handsome nemesis when things go awry at her best friend’s Costa Rican wedding.",
+    "enSlider": true
   }
 ]
