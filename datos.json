@@ -3,6 +3,7 @@
     "tipo": "pelicula",
     "titulo": "Scream 7",
     "img": "https://media.themoviedb.org/t/p/w300_and_h450_face/hflipaW7mtfKZM9WFEyzUdFsgSk.jpg",
+    "imgBanner": "",
     "url": "https://morelda.github.io/Scream-7/",
     "year": "2026",
     "etiquetas": [
@@ -11,12 +12,13 @@
       "Crimen"
     ],
     "sinopsis": "Cuando un nuevo asesino Ghostface aparece en el tranquilo pueblo donde Sidney Prescott ha construido una nueva vida, sus peores miedos se hacen realidad cuando su hija se convierte en el siguiente objetivo. Decidida a proteger a su familia, Sidney debe enfrentarse a los horrores de su pasado para poner fin a la masacre de una vez por todas.",
-    "enSlider": true
+    "enSlider": false
   },
   {
     "tipo": "pelicula",
     "titulo": "Máquina de guerra",
     "img": "https://media.themoviedb.org/t/p/w300_and_h450_face/d5YmQx9kPLQBHEboGwrAavypztB.jpg",
+    "imgBanner": "https://media.themoviedb.org/t/p/w500_and_h282_face/6yeVcxFR0j08vlv2OlL6zbewm4D.jpg",
     "url": "https://morelda.github.io/M-quina-de-guerra/",
     "year": "2026",
     "etiquetas": [
@@ -25,12 +27,13 @@
       "Suspense"
     ],
     "sinopsis": "En una última misión agotadora durante el entrenamiento para ser ranger, un ingeniero de combate debe liderar a su unidad contra una gigantesca máquina asesina de otro mundo.",
-    "enSlider": false
+    "enSlider": true
   },
   {
     "tipo": "pelicula",
     "titulo": "El engaño",
     "img": "https://media.themoviedb.org/t/p/w300_and_h450_face/uuIP7lRgzSjaZ4CT33WHfctLARs.jpg",
+    "imgBanner": "https://media.themoviedb.org/t/p/w500_and_h282_face/rbFqLPKj6D2JyRh5mOfA7jqX0Qk.jpg",
     "url": "https://morelda.github.io/El-enga-o/",
     "year": "2026",
     "etiquetas": [
@@ -139,6 +142,7 @@
     "tipo": "pelicula",
     "titulo": "Superman",
     "img": "https://www.themoviedb.org/t/p/w500/fvUJb08yatV2b3NUSwuYdQKYoFd.jpg",
+    "imgBanner": "",
     "url": "https://morelda.github.io/su-per-m/",
     "year": "2025",
     "etiquetas": [
@@ -147,7 +151,7 @@
       "Ciencia ficción"
     ],
     "sinopsis": "Mientras el mundo pierde la fe en la bondad, Clark Kent, un periodista en Metrópolis, se embarca en un viaje para reconciliar su herencia kryptoniana con su educación humana como Superman.",
-    "enSlider": true
+    "enSlider": false
   },
   {
     "tipo": "pelicula",
@@ -177,6 +181,7 @@
     "tipo": "pelicula",
     "titulo": "Anaconda",
     "img": "https://www.themoviedb.org/t/p/w500/hENLu86h3zljg0x8bdy8cOUxZF5.jpg",
+    "imgBanner": "",
     "url": "https://morelda.github.io/anaconda/",
     "year": "2025",
     "etiquetas": [
@@ -186,7 +191,7 @@
       "Terror"
     ],
     "sinopsis": "Doug y Griff, amigos de toda la vida, atraviesan una crisis de mediana edad y deciden realizar el remake de su película favorita de su juventud: Anaconda (1997). Viajan a la selva amazónica para filmar su versión, pero pronto descubren que una anaconda real los acecha, convirtiendo su proyecto cinematográfico en una lucha por sobrevivir. La película combina comedia, acción y terror en una experiencia cinematográfica única.",
-    "enSlider": true
+    "enSlider": false
   },
   {
     "tipo": "pelicula",
@@ -255,18 +260,20 @@
     "tipo": "pelicula",
     "titulo": "El juego del calamar",
     "img": "https://media.themoviedb.org/t/p/w300_and_h450_face/g72YfmqUU0AlbDXRiYmDZWs28f7.jpg",
+    "imgBanner": "",
     "url": "https://morelda.github.io/caamar1/",
     "year": "2021",
     "etiquetas": [
       "Drama"
     ],
     "sinopsis": "Cientos de personas con problemas de dinero aceptan una invitación rarísima para competir en juegos infantiles. Dentro los esperan un tentador premio y desafíos letales.",
-    "enSlider": true
+    "enSlider": false
   },
   {
     "tipo": "serie",
     "titulo": "ONE PIECE",
     "img": "https://media.themoviedb.org/t/p/w300_and_h450_face/gCZ18cl7Pc4tgiwMPWHTgjABrhy.jpg",
+    "imgBanner": "https://media.themoviedb.org/t/p/w500_and_h282_face/qD211Hb5XwFxrszzBBe5EUYJerh.jpg",
     "url": "https://morelda.github.io/ONE-PIECE/",
     "year": "2023",
     "etiquetas": [
@@ -280,6 +287,7 @@
     "tipo": "pelicula",
     "titulo": "Los Cuatro Fantásticos: Primeros pasos",
     "img": "https://media.themoviedb.org/t/p/w300_and_h450_face/ckfiXWGEMWrUP53cc6QyHijLlhl.jpg",
+    "imgBanner": "",
     "url": "https://morelda.github.io/-Los-4-Fant-sticos/",
     "year": "2025",
     "etiquetas": [
@@ -288,12 +296,13 @@
       "Acción"
     ],
     "sinopsis": "Con un mundo retrofuturista inspirado en los años 60 como telón de fondo, la Primera Familia de Marvel deberá hacer frente a su mayor desafío hasta la fecha. Obligados a buscar el equilibrio entre su papel de héroes y sus fuertes vínculos familiares, tendrán que defender la Tierra de un hambriento dios espacial llamado Galactus y su intrigante heraldo, Estela Plateada.",
-    "enSlider": true
+    "enSlider": false
   },
   {
     "tipo": "pelicula",
     "titulo": "La propuesta",
     "img": "https://media.themoviedb.org/t/p/w300_and_h450_face/bkbzlLA8HCEHRDxsTKGthII0BpW.jpg",
+    "imgBanner": "https://media.themoviedb.org/t/p/w1000_and_h450_multi_faces/ojgXOhVi9Yk8irDpRfDkIzdD1LK.jpg",
     "url": "https://morelda.github.io/La-Propuesta/",
     "year": "2009",
     "etiquetas": [
@@ -308,6 +317,7 @@
     "tipo": "pelicula",
     "titulo": "Zeta",
     "img": "https://media.themoviedb.org/t/p/w300_and_h450_face/tEFMZGcmxBDCodbLAqmrjdjCTwm.jpg",
+    "imgBanner": "https://media.themoviedb.org/t/p/w500_and_h282_face/ptcyGmBonW6mDQmrPhXbt6Rjrlp.jpg",
     "url": "https://morelda.github.io/zeta/",
     "year": "2026",
     "etiquetas": [
@@ -321,6 +331,7 @@
     "tipo": "pelicula",
     "titulo": "A Costa Rican Wedding",
     "img": "https://media.themoviedb.org/t/p/w300_and_h450_face/vEhmBiyYcmi12eISpjQVtW30qz8.jpg",
+    "imgBanner": "https://media.themoviedb.org/t/p/w500_and_h282_face/yC6lxF30s9IA7X0Vx1ZKFo6Tni6.jpg",
     "url": "https://morelda.github.io/Amor-en-Costa-Rica/",
     "year": "2025",
     "etiquetas": [
@@ -357,6 +368,38 @@
       "Familia"
     ],
     "sinopsis": "Homer debe salvar al mundo de una catástrofe que él mismo ha provocado. Todo comienza con Homer, su nueva mascota, un cerdo, y un silo lleno de excrementos que tiene una fuga, una combinación que desencadena un desastre distinto a todo lo que Springfield haya experimentado jamás. Mientras Marge está indignada por la monumental metedura de pata de su patán marido, una turba vengativa cae sobre el hogar de los Simpson...",
+    "enSlider": true
+  },
+  {
+    "tipo": "pelicula",
+    "titulo": "Shrek, Felices para siempre",
+    "img": "https://media.themoviedb.org/t/p/w300_and_h450_face/11K03KebrdD8nUlGFJX3rSL3KHK.jpg",
+    "imgBanner": "https://media.themoviedb.org/t/p/w1000_and_h450_multi_faces/uzzTystB8lL0mRDII5Sfs5HxgkI.jpg",
+    "url": "https://morelda.github.io/Shrek-4/",
+    "year": "2010",
+    "etiquetas": [
+      "Comedia",
+      "Aventura",
+      "Fantasía",
+      "Animación",
+      "Familia"
+    ],
+    "sinopsis": "En lugar de espantar a los aldeanos como él solía hacerlo, un recluido Shrek ahora accede a autografiar horquillas para siembra. Anhelando los días cuando se sentía un \"ogro real\", Shrek es embaucado al firmar un pacto con el afable negociador Rumpelstiltskin. De pronto Shrek se encuentra en una retorcida versión alterna de Muy Muy Lejano, donde Fiona es un ogro de caza, Rumpelstiltskin es el rey, Burro nunca ha conocido a Shrek, el Gato con Botas es obeso y perezoso, y Shrek y Fiona no se conocían. Ahora, está en las manos de Shrek deshacer todo lo que hizo con la esperanza de salvar a sus amigos, restaurar su mundo y recuperar a su único y verdadero amor.",
+    "enSlider": true
+  },
+  {
+    "tipo": "pelicula",
+    "titulo": "La línea roja",
+    "img": "https://media.themoviedb.org/t/p/w300_and_h450_face/q3ROA6OqVA9rWSsC2DzdkPQvxWW.jpg",
+    "imgBanner": "https://media.themoviedb.org/t/p/w1000_and_h450_multi_faces/qbbx3NDw6FrtQSrKdxn9n72xJzO.jpg",
+    "url": "https://morelda.github.io/La-l-nea-roja/",
+    "year": "2026",
+    "etiquetas": [
+      "Suspense",
+      "Crimen",
+      "Drama"
+    ],
+    "sinopsis": "Tres mujeres buscan venganza tras ser víctimas de una estafa telefónica. ¿Podrán ajustar cuentas con la red criminal que les robó dinero y también su dignidad?",
     "enSlider": true
   }
 ]
