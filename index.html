@@ -78,6 +78,11 @@
         .p-meta { display: flex; gap: 15px; margin: 15px 0; font-weight: bold; color: #46d369; }
         #video-container { width: 100%; background: #000; display: none; margin-top: 20px; }
         iframe { width: 100%; aspect-ratio: 16/9; border: none; }
+        
+        /* SELECTOR DE SERVIDORES */
+        .server-list { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .btn-server { background: #333; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+        .btn-server:hover { background: var(--primary); }
 
         @media (max-width: 768px) {
             .movie-card { width: 135px; }
@@ -119,7 +124,10 @@
                     <span id="p-tipo" style="text-transform: uppercase;"></span>
                 </div>
                 <p id="p-sinopsis" style="font-size: 1.1rem; line-height: 1.6; color: #ccc; margin-bottom: 30px;"></p>
-                <button class="btn-play-hero" onclick="startVideo()">▶ REPRODUCIR AHORA</button>
+                
+                <div id="server-selector" class="server-list"></div>
+                
+                <button class="btn-play-hero" id="btnMainPlay" onclick="startVideo()">▶ REPRODUCIR AHORA</button>
             </div>
         </div>
         <div id="video-container">
@@ -130,7 +138,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         let allMovies = [];
-        let currentUrl = "";
+        let currentServers = [];
 
         async function init() {
             try {
@@ -144,7 +152,7 @@
             document.getElementById('loading').style.display = 'none';
             document.getElementById('app').style.display = 'block';
 
-            // SLIDER
+            // SLIDER (Detecta enSlider del panel)
             const destacados = pelis.filter(p => p.enSlider === true);
             const sliderData = destacados.length > 0 ? destacados : pelis.slice(0, 5);
             document.getElementById('sliderContent').innerHTML = sliderData.map(p => {
@@ -201,15 +209,32 @@
             });
         }
 
-        // FUNCIONES DEL REPRODUCTOR
         function openPlayer(p) {
-            currentUrl = p.url;
+            // Sincronización: usa urls (nuevo) o url (viejo)
+            currentServers = p.urls ? p.urls : [p.url];
+            
             document.getElementById('p-titulo').innerText = p.titulo;
             document.getElementById('p-year').innerText = p.year;
             document.getElementById('p-tipo').innerText = p.tipo;
             document.getElementById('p-sinopsis').innerText = p.sinopsis;
             document.getElementById('p-hero').style.backgroundImage = `url('${p.imgBanner || p.img}')`;
             
+            // Generar botones de servidores si hay más de uno
+            const serverBox = document.getElementById('server-selector');
+            serverBox.innerHTML = "";
+            if(currentServers.length > 1) {
+                currentServers.forEach((url, i) => {
+                    const btn = document.createElement('button');
+                    btn.className = "btn-server";
+                    btn.innerText = `SERVIDOR ${i+1}`;
+                    btn.onclick = () => {
+                        document.getElementById('main-frame').src = url;
+                        document.getElementById('video-container').style.display = 'block';
+                    };
+                    serverBox.appendChild(btn);
+                });
+            }
+
             document.getElementById('video-container').style.display = 'none';
             document.getElementById('main-frame').src = "";
             document.getElementById('player-overlay').style.display = 'flex';
@@ -219,7 +244,7 @@
         function startVideo() {
             const container = document.getElementById('video-container');
             container.style.display = 'block';
-            document.getElementById('main-frame').src = currentUrl;
+            document.getElementById('main-frame').src = currentServers[0];
             container.scrollIntoView({ behavior: 'smooth' });
         }
 
