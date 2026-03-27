@@ -4,59 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>PARTY PLAY | Cine & Series</title>
-    
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
     <style>
-        :root { 
-            --primary: #ff2d75; 
-            --bg: #0a0a0b; 
-            --card-bg: #161618; 
-            --text: #ffffff;
-        }
-
-        body { 
-            margin: 0; padding: 0; background: var(--bg); color: var(--text); 
-            font-family: 'Poppins', sans-serif; overflow-x: hidden;
-        }
-
-        /* HEADER */
-        header { 
-            position: fixed; top: 0; width: 100%; padding: 15px 5%;
-            display: flex; align-items: center; z-index: 1000;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
-            transition: 0.4s; box-sizing: border-box;
-        }
-        .logo-box {
-            background: var(--primary); padding: 6px 15px; border-radius: 6px;
-            box-shadow: 0 0 20px rgba(255, 45, 117, 0.4);
-        }
+        :root { --primary: #ff2d75; --bg: #0a0a0b; --text: #ffffff; }
+        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+        header { position: fixed; top: 0; width: 100%; padding: 15px 5%; display: flex; align-items: center; z-index: 1000; background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent); box-sizing: border-box; }
+        .logo-box { background: var(--primary); padding: 6px 15px; border-radius: 6px; box-shadow: 0 0 20px rgba(255, 45, 117, 0.4); }
         .logo-img { height: 30px; }
         .search-container { margin-left: 20px; flex-grow: 1; max-width: 400px; }
-        .search-bar { 
-            width: 100%; padding: 10px 20px; border-radius: 50px; 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);
-            color: white; outline: none;
-        }
-
-        /* BANNER PRINCIPAL */
+        .search-bar { width: 100%; padding: 10px 20px; border-radius: 50px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px); color: white; outline: none; }
         .hero-wrapper { width: 100%; height: 85vh; position: relative; }
         .main-slider { height: 100%; }
         .swiper-slide-hero { position: relative; overflow: hidden; background: #000; }
         .hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
-        .swiper-slide-active .hero-img { animation: kenburns 10s ease-out forwards; }
-        @keyframes kenburns { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
         .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, var(--bg) 5%, transparent 60%); }
         .hero-info { position: absolute; bottom: 15%; left: 5%; z-index: 10; max-width: 600px; }
         .hero-info h2 { font-family: 'Orbitron'; font-size: clamp(2rem, 5vw, 4rem); margin: 0 0 20px; }
-        .btn-play-hero { 
-            background: var(--primary); color: white; padding: 12px 30px; border-radius: 4px;
-            text-decoration: none; font-weight: bold; font-family: 'Orbitron'; cursor: pointer; border:none;
-        }
-
-        /* FILAS */
+        .btn-play-hero { background: var(--primary); color: white; padding: 12px 30px; border-radius: 4px; font-weight: bold; font-family: 'Orbitron'; cursor: pointer; border:none; }
         .row-title { font-family: 'Orbitron'; font-size: 1.1rem; margin: 40px 0 15px 5%; color: #eee; }
         .listado-container { padding: 0 5% !important; overflow: visible !important; }
         .movie-card { width: 170px; transition: transform 0.5s; cursor: pointer; }
@@ -64,213 +29,98 @@
         .poster-container { width: 100%; aspect-ratio: 2/3; border-radius: 6px; overflow: hidden; border: 1px solid #222; }
         .poster-container img { width: 100%; height: 100%; object-fit: cover; }
         .movie-info { padding: 8px 0; font-size: 0.8rem; text-align: center; }
-        .movie-info span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-        /* PLAYER DINÁMICO (OVERLAY) */
-        #player-overlay { 
-            position: fixed; inset: 0; background: #0a0a0b; z-index: 2000; 
-            display: none; flex-direction: column; overflow-y: auto; 
-        }
-        .p-close { position: absolute; top: 20px; right: 20px; background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; z-index: 2100; font-weight: bold; }
+        #player-overlay { position: fixed; inset: 0; background: #0a0a0b; z-index: 2000; display: none; flex-direction: column; overflow-y: auto; }
+        .p-close { position: absolute; top: 20px; right: 20px; background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; z-index: 2100; }
         .p-hero { position: relative; min-height: 70vh; display: flex; align-items: center; padding: 0 5%; background-size: cover; background-position: center; }
         .p-hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to right, #0a0a0b 15%, transparent 80%), linear-gradient(to top, #0a0a0b, transparent); }
         .p-content { position: relative; z-index: 10; max-width: 700px; }
-        .p-meta { display: flex; gap: 15px; margin: 15px 0; font-weight: bold; color: #46d369; }
         #video-container { width: 100%; background: #000; display: none; margin-top: 20px; }
         iframe { width: 100%; aspect-ratio: 16/9; border: none; }
-        
-        /* SELECTOR DE SERVIDORES */
-        .server-list { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-        .btn-server { background: #333; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-size: 12px; }
-        .btn-server:hover { background: var(--primary); }
-
-        @media (max-width: 768px) {
-            .movie-card { width: 135px; }
-            .hero-wrapper { height: 60vh; }
-        }
+        .server-list { display: flex; gap: 10px; margin: 20px 0; flex-wrap: wrap; }
+        .btn-server { background: #333; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; }
     </style>
 </head>
 <body>
-
     <header id="navbar">
-        <div class="logo-box">
-            <img src="https://i.postimg.cc/7hgdMS6K/Picsart-24-08-01-00-13-45-109.png" class="logo-img">
-        </div>
-        <div class="search-container">
-            <input type="text" id="searchInput" class="search-bar" placeholder="Buscar..." onkeyup="filterAll()">
-        </div>
+        <div class="logo-box"><img src="https://i.postimg.cc/7hgdMS6K/Picsart-24-08-01-00-13-45-109.png" class="logo-img"></div>
+        <div class="search-container"><input type="text" id="searchInput" class="search-bar" placeholder="Buscar..." onkeyup="filterAll()"></div>
     </header>
-
-    <div id="loading" style="text-align: center; padding: 200px 0; font-family: 'Orbitron'; color: var(--primary); font-size: 1.5rem;">CARGANDO PARTY PLAY...</div>
-
+    <div id="loading" style="text-align: center; padding: 200px 0; font-family: 'Orbitron'; color: var(--primary);">CARGANDO...</div>
     <div id="app" style="display:none">
-        <div class="hero-wrapper">
-            <div class="swiper main-slider">
-                <div class="swiper-wrapper" id="sliderContent"></div>
-            </div>
-        </div>
+        <div class="hero-wrapper"><div class="swiper main-slider"><div class="swiper-wrapper" id="sliderContent"></div></div></div>
         <main id="sections" style="padding-bottom: 80px;"></main>
     </div>
-
     <div id="player-overlay">
         <button class="p-close" onclick="closePlayer()">CERRAR ✕</button>
         <div id="p-hero" class="p-hero">
             <div class="p-content">
-                <div style="color: var(--primary); font-weight: 900; letter-spacing: 2px; margin-bottom: 10px;">PARTY PLAY ORIGINAL</div>
                 <h1 id="p-titulo" style="font-family: 'Orbitron'; font-size: clamp(2rem, 5vw, 4rem); margin: 0;"></h1>
-                <div class="p-meta">
-                    <span id="p-year"></span>
-                    <span style="border: 1px solid #555; padding: 0 5px; color: white;">HD</span>
-                    <span id="p-tipo" style="text-transform: uppercase;"></span>
-                </div>
-                <p id="p-sinopsis" style="font-size: 1.1rem; line-height: 1.6; color: #ccc; margin-bottom: 30px;"></p>
-                
+                <p id="p-sinopsis" style="color: #ccc; margin: 20px 0;"></p>
                 <div id="server-selector" class="server-list"></div>
-                
-                <button class="btn-play-hero" id="btnMainPlay" onclick="startVideo()">▶ REPRODUCIR AHORA</button>
+                <button class="btn-play-hero" onclick="startVideo()">▶ REPRODUCIR AHORA</button>
             </div>
         </div>
-        <div id="video-container">
-            <iframe id="main-frame" src="" allowfullscreen></iframe>
-        </div>
+        <div id="video-container"><iframe id="main-frame" src="" allowfullscreen></iframe></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        let allMovies = [];
-        let currentServers = [];
-
+        let allMovies = []; let currentServers = [];
         async function init() {
             try {
                 const r = await fetch('datos.json?v=' + Math.random());
-                allMovies = await r.json();
-                renderWeb(allMovies);
-            } catch (e) { document.getElementById('loading').innerText = "ERROR AL CONECTAR"; }
+                allMovies = await r.json(); renderWeb(allMovies);
+            } catch (e) { document.getElementById('loading').innerText = "ERROR"; }
         }
-
         function renderWeb(pelis) {
             document.getElementById('loading').style.display = 'none';
             document.getElementById('app').style.display = 'block';
-
-            // SLIDER (Detecta enSlider del panel)
             const destacados = pelis.filter(p => p.enSlider === true);
-            const sliderData = destacados.length > 0 ? destacados : pelis.slice(0, 5);
-            document.getElementById('sliderContent').innerHTML = sliderData.map(p => {
-                const pData = JSON.stringify(p).replace(/'/g, "&apos;");
-                return `
+            document.getElementById('sliderContent').innerHTML = (destacados.length > 0 ? destacados : pelis.slice(0,5)).map(p => `
                 <div class="swiper-slide swiper-slide-hero">
-                    <img src="${p.imgBanner ? p.imgBanner : p.img}" class="hero-img">
-                    <div class="hero-overlay"></div>
-                    <div class="hero-info">
-                        <h2>${p.titulo}</h2>
-                        <button class="btn-play-hero" onclick='openPlayer(${pData})'>▶ VER AHORA</button>
-                    </div>
-                </div>`;
-            }).join('');
-
-            new Swiper('.main-slider', { loop: true, effect: 'fade', autoplay: { delay: 6000 }, speed: 1000 });
-
-            // CATEGORÍAS
-            const main = document.getElementById('sections');
-            main.innerHTML = "";
-            const categorias = [...new Set(pelis.flatMap(p => p.etiquetas || ["Nuevos"]))].sort();
-
-            categorias.forEach((cat, idx) => {
-                const filtradas = pelis.filter(p => (p.etiquetas || []).includes(cat));
+                    <img src="${p.imgBanner || p.img}" class="hero-img"><div class="hero-overlay"></div>
+                    <div class="hero-info"><h2>${p.titulo}</h2><button class="btn-play-hero" onclick='openPlayer(${JSON.stringify(p).replace(/'/g, "&apos;")})'>▶ VER AHORA</button></div>
+                </div>`).join('');
+            new Swiper('.main-slider', { loop: true, effect: 'fade', autoplay: { delay: 6000 } });
+            
+            const main = document.getElementById('sections'); main.innerHTML = "";
+            let cats = [...new Set(pelis.flatMap(p => (p.etiquetas && p.etiquetas.length > 0) ? p.etiquetas : ["Novedades"]))].sort();
+            cats.forEach((cat, idx) => {
+                const filtradas = pelis.filter(p => cat === "Novedades" ? (!p.etiquetas || p.etiquetas.length === 0 || p.etiquetas.includes("Novedades")) : (p.etiquetas && p.etiquetas.includes(cat)));
                 if(filtradas.length === 0) return;
-
                 const row = document.createElement('div');
-                row.className = "category-row";
-                row.innerHTML = `
-                    <h2 class="row-title">${cat}</h2>
-                    <div class="swiper listado-container" id="row-${idx}">
-                        <div class="swiper-wrapper">
-                            ${filtradas.map(p => {
-                                const pData = JSON.stringify(p).replace(/'/g, "&apos;");
-                                return `
-                                <div class="swiper-slide movie-card" data-title="${p.titulo}" onclick='openPlayer(${pData})'>
-                                    <div class="poster-container">
-                                        <img src="${p.img}" loading="lazy">
-                                    </div>
-                                    <div class="movie-info">
-                                        <span>${p.titulo}</span>
-                                    </div>
-                                </div>`;
-                            }).join('')}
-                        </div>
-                    </div>`;
+                row.innerHTML = `<h2 class="row-title">${cat}</h2><div class="swiper listado-container" id="row-${idx}"><div class="swiper-wrapper">
+                    ${filtradas.map(p => `<div class="swiper-slide movie-card" onclick='openPlayer(${JSON.stringify(p).replace(/'/g, "&apos;")})' data-title="${p.titulo}">
+                        <div class="poster-container"><img src="${p.img}"></div><div class="movie-info"><span>${p.titulo}</span></div></div>`).join('')}
+                </div></div>`;
                 main.appendChild(row);
-
-                new Swiper(`#row-${idx}`, { 
-                    slidesPerView: 'auto', spaceBetween: 12, 
-                    freeMode: { enabled: true, momentumRatio: 0.5 },
-                    grabCursor: true, mousewheel: { forceToAxis: true }
-                });
+                new Swiper(`#row-${idx}`, { slidesPerView: 'auto', spaceBetween: 12, freeMode: true });
             });
         }
-
         function openPlayer(p) {
-            // Sincronización: usa urls (nuevo) o url (viejo)
-            currentServers = p.urls ? p.urls : [p.url];
-            
+            currentServers = p.urls || [p.url];
             document.getElementById('p-titulo').innerText = p.titulo;
-            document.getElementById('p-year').innerText = p.year;
-            document.getElementById('p-tipo').innerText = p.tipo;
             document.getElementById('p-sinopsis').innerText = p.sinopsis;
             document.getElementById('p-hero').style.backgroundImage = `url('${p.imgBanner || p.img}')`;
-            
-            // Generar botones de servidores si hay más de uno
-            const serverBox = document.getElementById('server-selector');
-            serverBox.innerHTML = "";
+            const sBox = document.getElementById('server-selector'); sBox.innerHTML = "";
             if(currentServers.length > 1) {
-                currentServers.forEach((url, i) => {
-                    const btn = document.createElement('button');
-                    btn.className = "btn-server";
-                    btn.innerText = `SERVIDOR ${i+1}`;
-                    btn.onclick = () => {
-                        document.getElementById('main-frame').src = url;
-                        document.getElementById('video-container').style.display = 'block';
-                    };
-                    serverBox.appendChild(btn);
+                currentServers.forEach((u, i) => {
+                    const b = document.createElement('button'); b.className = "btn-server"; b.innerText = `SERVER ${i+1}`;
+                    b.onclick = () => { document.getElementById('main-frame').src = u; document.getElementById('video-container').style.display='block'; };
+                    sBox.appendChild(b);
                 });
             }
-
-            document.getElementById('video-container').style.display = 'none';
-            document.getElementById('main-frame').src = "";
             document.getElementById('player-overlay').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
         }
-
-        function startVideo() {
-            const container = document.getElementById('video-container');
-            container.style.display = 'block';
-            document.getElementById('main-frame').src = currentServers[0];
-            container.scrollIntoView({ behavior: 'smooth' });
+        function startVideo() { 
+            document.getElementById('video-container').style.display = 'block'; 
+            document.getElementById('main-frame').src = currentServers[0]; 
         }
-
-        function closePlayer() {
-            document.getElementById('player-overlay').style.display = 'none';
-            document.getElementById('main-frame').src = "";
-            document.body.style.overflow = 'auto';
-        }
-
+        function closePlayer() { document.getElementById('player-overlay').style.display = 'none'; document.getElementById('main-frame').src = ""; }
         function filterAll() {
             const q = document.getElementById('searchInput').value.toLowerCase();
-            document.querySelectorAll('.movie-card').forEach(c => {
-                const match = c.dataset.title.toLowerCase().includes(q);
-                c.style.display = match ? "block" : "none";
-            });
-            document.querySelectorAll('.category-row').forEach(row => {
-                const hasVisible = row.querySelectorAll('.movie-card[style="display: block"]').length > 0;
-                row.style.display = (q === "" || hasVisible) ? "block" : "none";
-            });
+            document.querySelectorAll('.movie-card').forEach(c => c.style.display = c.dataset.title.toLowerCase().includes(q) ? "block" : "none");
         }
-
-        window.onscroll = () => {
-            const nav = document.getElementById('navbar');
-            nav.style.background = window.scrollY > 50 ? "rgba(10,10,11,0.95)" : "linear-gradient(to bottom, rgba(0,0,0,0.9), transparent)";
-        };
-
         window.onload = init;
     </script>
 </body>
