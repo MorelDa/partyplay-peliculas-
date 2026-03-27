@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>PARTY PLAY | Cine & Series</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Poppins:wght@300;400;600&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
         :root { 
             --primary: #ff2d75; 
-            --brand: #e50914;
             --bg: #0a0a0b; 
             --card-bg: #161618; 
             --text: #ffffff;
@@ -27,7 +26,7 @@
             position: fixed; top: 0; width: 100%; padding: 15px 5%;
             display: flex; align-items: center; z-index: 1000;
             background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
-            transition: 0.4s;
+            transition: 0.4s; box-sizing: border-box;
         }
         .logo-box {
             background: var(--primary); padding: 6px 15px; border-radius: 6px;
@@ -42,73 +41,43 @@
             color: white; outline: none;
         }
 
-        /* HERO SLIDER */
+        /* BANNER PRINCIPAL */
         .hero-wrapper { width: 100%; height: 85vh; position: relative; }
         .main-slider { height: 100%; }
         .swiper-slide-hero { position: relative; overflow: hidden; background: #000; }
         .hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
         .swiper-slide-active .hero-img { animation: kenburns 10s ease-out forwards; }
         @keyframes kenburns { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
-        .hero-overlay { 
-            position: absolute; inset: 0; 
-            background: linear-gradient(to top, var(--bg) 5%, transparent 60%); 
-        }
-        .hero-info { 
-            position: absolute; bottom: 15%; left: 5%; z-index: 10; 
-            max-width: 600px; animation: fadeInUp 1s ease;
-        }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, var(--bg) 5%, transparent 60%); }
+        .hero-info { position: absolute; bottom: 15%; left: 5%; z-index: 10; max-width: 600px; }
         .hero-info h2 { font-family: 'Orbitron'; font-size: clamp(2rem, 5vw, 4rem); margin: 0 0 20px; }
         .btn-play-hero { 
             background: var(--primary); color: white; padding: 12px 30px; border-radius: 4px;
-            text-decoration: none; font-weight: bold; font-family: 'Orbitron';
-            border:none; cursor: pointer;
+            text-decoration: none; font-weight: bold; font-family: 'Orbitron'; cursor: pointer; border:none;
         }
 
-        /* ROW LISTS */
-        .row-title { 
-            font-family: 'Orbitron'; font-size: 1.1rem; margin: 40px 0 15px 5%; 
-            color: #eee; letter-spacing: 1px; 
-        }
+        /* FILAS */
+        .row-title { font-family: 'Orbitron'; font-size: 1.1rem; margin: 40px 0 15px 5%; color: #eee; }
         .listado-container { padding: 0 5% !important; overflow: visible !important; }
-        .movie-card { width: 170px; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
+        .movie-card { width: 170px; transition: transform 0.5s; cursor: pointer; }
         .movie-card:hover { transform: scale(1.15); z-index: 100; }
         .poster-container { width: 100%; aspect-ratio: 2/3; border-radius: 6px; overflow: hidden; border: 1px solid #222; }
         .poster-container img { width: 100%; height: 100%; object-fit: cover; }
         .movie-info { padding: 8px 0; font-size: 0.8rem; text-align: center; }
         .movie-info span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-        /* VISTA DE DETALLE (PRE-PLAY) */
-        #detail-view {
-            position: fixed; inset: 0; z-index: 2000; background: var(--bg);
-            display: none; flex-direction: column; overflow-y: auto;
+        /* PLAYER DINÁMICO (OVERLAY) */
+        #player-overlay { 
+            position: fixed; inset: 0; background: #0a0a0b; z-index: 2000; 
+            display: none; flex-direction: column; overflow-y: auto; 
         }
-        #detail-view.active { display: block; }
-        .detail-hero {
-            position: relative; height: 100vh; width: 100%;
-            display: flex; align-items: center; padding: 0 4%;
-            background-size: cover; background-position: center;
-        }
-        .detail-hero::before {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.9) 100%),
-                        linear-gradient(to top, var(--bg) 0%, transparent 30%);
-        }
-        .detail-content { max-width: 650px; z-index: 10; font-family: 'Roboto', sans-serif; }
-        .detail-content h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 15px; text-transform: uppercase; }
-        .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 20px; font-weight: 700; }
-        .match { color: #46d369; }
-        .age { border: 1px solid #808080; padding: 0 6px; font-size: 0.8rem; }
-        .desc { font-size: clamp(1rem, 2.5vw, 1.2rem); line-height: 1.5; color: #e5e5e5; margin-bottom: 30px; }
-        .close-detail { position: absolute; top: 30px; right: 30px; font-size: 2.5rem; color: white; cursor: pointer; z-index: 20; }
-
-        /* REPRODUCTOR */
-        #player-overlay { position: fixed; inset: 0; background: #000; z-index: 3000; display: none; flex-direction: column; }
-        #player-overlay.active { display: flex; }
-        .player-nav { padding: 15px 20px; display: flex; align-items: center; gap: 15px; }
-        .player-frame { flex: 1; width: 100%; border: none; }
-        
-        .actions { display: flex; gap: 12px; }
-        .btn-play { background: #fff; color: #000; padding: 14px 35px; border-radius: 4px; font-weight: 700; cursor: pointer; border: none; display: flex; align-items: center; gap: 10px; }
+        .p-close { position: absolute; top: 20px; right: 20px; background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; z-index: 2100; font-weight: bold; }
+        .p-hero { position: relative; min-height: 70vh; display: flex; align-items: center; padding: 0 5%; background-size: cover; background-position: center; }
+        .p-hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to right, #0a0a0b 15%, transparent 80%), linear-gradient(to top, #0a0a0b, transparent); }
+        .p-content { position: relative; z-index: 10; max-width: 700px; }
+        .p-meta { display: flex; gap: 15px; margin: 15px 0; font-weight: bold; color: #46d369; }
+        #video-container { width: 100%; background: #000; display: none; margin-top: 20px; }
+        iframe { width: 100%; aspect-ratio: 16/9; border: none; }
 
         @media (max-width: 768px) {
             .movie-card { width: 135px; }
@@ -138,46 +107,36 @@
         <main id="sections" style="padding-bottom: 80px;"></main>
     </div>
 
-    <div id="detail-view">
-        <span class="close-detail" onclick="closeDetail()">✕</span>
-        <div class="detail-hero" id="detail-bg">
-            <div class="detail-content">
-                <div style="color:var(--brand); font-weight:900; margin-bottom:10px;">PARTY PLAY ORIGINAL</div>
-                <h1 id="detail-title"></h1>
-                <div class="meta">
-                    <span class="match">99% para ti</span>
-                    <span id="detail-year">2026</span>
-                    <span class="age">16+</span>
-                    <span>HD</span>
+    <div id="player-overlay">
+        <button class="p-close" onclick="closePlayer()">CERRAR ✕</button>
+        <div id="p-hero" class="p-hero">
+            <div class="p-content">
+                <div style="color: var(--primary); font-weight: 900; letter-spacing: 2px; margin-bottom: 10px;">PARTY PLAY ORIGINAL</div>
+                <h1 id="p-titulo" style="font-family: 'Orbitron'; font-size: clamp(2rem, 5vw, 4rem); margin: 0;"></h1>
+                <div class="p-meta">
+                    <span id="p-year"></span>
+                    <span style="border: 1px solid #555; padding: 0 5px; color: white;">HD</span>
+                    <span id="p-tipo" style="text-transform: uppercase;"></span>
                 </div>
-                <p class="desc" id="detail-desc"></p>
-                <div class="actions">
-                    <button class="btn-play" id="main-play-btn">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l15 8-15 8z"/></svg>
-                        Reproducir
-                    </button>
-                </div>
+                <p id="p-sinopsis" style="font-size: 1.1rem; line-height: 1.6; color: #ccc; margin-bottom: 30px;"></p>
+                <button class="btn-play-hero" onclick="startVideo()">▶ REPRODUCIR AHORA</button>
             </div>
         </div>
-    </div>
-
-    <div id="player-overlay">
-        <div class="player-nav">
-            <button onclick="closePlayer()" style="background:none; border:none; color:white; font-size:2rem; cursor:pointer;">✕</button>
-            <span id="player-title" style="font-weight:bold"></span>
+        <div id="video-container">
+            <iframe id="main-frame" src="" allowfullscreen></iframe>
         </div>
-        <iframe class="player-frame" id="main-frame" src="" allowfullscreen></iframe>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        let globalData = [];
+        let allMovies = [];
+        let currentUrl = "";
 
         async function init() {
             try {
                 const r = await fetch('datos.json?v=' + Math.random());
-                globalData = await r.json();
-                renderWeb(globalData);
+                allMovies = await r.json();
+                renderWeb(allMovies);
             } catch (e) { document.getElementById('loading').innerText = "ERROR AL CONECTAR"; }
         }
 
@@ -185,23 +144,27 @@
             document.getElementById('loading').style.display = 'none';
             document.getElementById('app').style.display = 'block';
 
+            // SLIDER
             const destacados = pelis.filter(p => p.enSlider === true);
             const sliderData = destacados.length > 0 ? destacados : pelis.slice(0, 5);
-
-            document.getElementById('sliderContent').innerHTML = sliderData.map(p => `
+            document.getElementById('sliderContent').innerHTML = sliderData.map(p => {
+                const pData = JSON.stringify(p).replace(/'/g, "&apos;");
+                return `
                 <div class="swiper-slide swiper-slide-hero">
                     <img src="${p.imgBanner ? p.imgBanner : p.img}" class="hero-img">
                     <div class="hero-overlay"></div>
                     <div class="hero-info">
                         <h2>${p.titulo}</h2>
-                        <button class="btn-play-hero" onclick="openDetail('${p.titulo}')">▶ VER AHORA</button>
+                        <button class="btn-play-hero" onclick='openPlayer(${pData})'>▶ VER AHORA</button>
                     </div>
-                </div>
-            `).join('');
+                </div>`;
+            }).join('');
 
             new Swiper('.main-slider', { loop: true, effect: 'fade', autoplay: { delay: 6000 }, speed: 1000 });
 
+            // CATEGORÍAS
             const main = document.getElementById('sections');
+            main.innerHTML = "";
             const categorias = [...new Set(pelis.flatMap(p => p.etiquetas || ["Nuevos"]))].sort();
 
             categorias.forEach((cat, idx) => {
@@ -214,58 +177,56 @@
                     <h2 class="row-title">${cat}</h2>
                     <div class="swiper listado-container" id="row-${idx}">
                         <div class="swiper-wrapper">
-                            ${filtradas.map(p => `
-                                <div class="swiper-slide movie-card" data-title="${p.titulo}" onclick="openDetail('${p.titulo}')">
+                            ${filtradas.map(p => {
+                                const pData = JSON.stringify(p).replace(/'/g, "&apos;");
+                                return `
+                                <div class="swiper-slide movie-card" data-title="${p.titulo}" onclick='openPlayer(${pData})'>
                                     <div class="poster-container">
                                         <img src="${p.img}" loading="lazy">
                                     </div>
                                     <div class="movie-info">
                                         <span>${p.titulo}</span>
                                     </div>
-                                </div>
-                            `).join('')}
+                                </div>`;
+                            }).join('')}
                         </div>
-                    </div>
-                `;
+                    </div>`;
                 main.appendChild(row);
 
                 new Swiper(`#row-${idx}`, { 
-                    slidesPerView: 'auto', 
-                    spaceBetween: 12, 
+                    slidesPerView: 'auto', spaceBetween: 12, 
                     freeMode: { enabled: true, momentumRatio: 0.5 },
-                    grabCursor: true
+                    grabCursor: true, mousewheel: { forceToAxis: true }
                 });
             });
         }
 
-        // FUNCIONES DE NAVEGACIÓN PROFESIONAL
-        function openDetail(titulo) {
-            const p = globalData.find(item => item.titulo === titulo);
-            if(!p) return;
-
-            document.getElementById('detail-title').innerText = p.titulo;
-            document.getElementById('detail-desc').innerText = p.descripcion || "Sin descripción disponible.";
-            document.getElementById('detail-bg').style.backgroundImage = `url('${p.imgBanner || p.img}')`;
-            document.getElementById('detail-view').classList.add('active');
+        // FUNCIONES DEL REPRODUCTOR
+        function openPlayer(p) {
+            currentUrl = p.url;
+            document.getElementById('p-titulo').innerText = p.titulo;
+            document.getElementById('p-year').innerText = p.year;
+            document.getElementById('p-tipo').innerText = p.tipo;
+            document.getElementById('p-sinopsis').innerText = p.sinopsis;
+            document.getElementById('p-hero').style.backgroundImage = `url('${p.imgBanner || p.img}')`;
             
-            document.getElementById('main-play-btn').onclick = () => openPlayer(p.url, p.titulo);
+            document.getElementById('video-container').style.display = 'none';
+            document.getElementById('main-frame').src = "";
+            document.getElementById('player-overlay').style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
 
-        function closeDetail() {
-            document.getElementById('detail-view').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        function openPlayer(url, titulo) {
-            document.getElementById('player-overlay').classList.add('active');
-            document.getElementById('main-frame').src = url;
-            document.getElementById('player-title').innerText = titulo;
+        function startVideo() {
+            const container = document.getElementById('video-container');
+            container.style.display = 'block';
+            document.getElementById('main-frame').src = currentUrl;
+            container.scrollIntoView({ behavior: 'smooth' });
         }
 
         function closePlayer() {
-            document.getElementById('player-overlay').classList.remove('active');
-            document.getElementById('main-frame').src = '';
+            document.getElementById('player-overlay').style.display = 'none';
+            document.getElementById('main-frame').src = "";
+            document.body.style.overflow = 'auto';
         }
 
         function filterAll() {
@@ -274,7 +235,16 @@
                 const match = c.dataset.title.toLowerCase().includes(q);
                 c.style.display = match ? "block" : "none";
             });
+            document.querySelectorAll('.category-row').forEach(row => {
+                const hasVisible = row.querySelectorAll('.movie-card[style="display: block"]').length > 0;
+                row.style.display = (q === "" || hasVisible) ? "block" : "none";
+            });
         }
+
+        window.onscroll = () => {
+            const nav = document.getElementById('navbar');
+            nav.style.background = window.scrollY > 50 ? "rgba(10,10,11,0.95)" : "linear-gradient(to bottom, rgba(0,0,0,0.9), transparent)";
+        };
 
         window.onload = init;
     </script>
