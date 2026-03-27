@@ -401,5 +401,18 @@
     ],
     "sinopsis": "Tres mujeres buscan venganza tras ser víctimas de una estafa telefónica. ¿Podrán ajustar cuentas con la red criminal que les robó dinero y también su dignidad?",
     "enSlider": true
+  },
+  {
+    "tipo": "pelicula",
+    "titulo": "BTS  El Comeback en vivo",
+    "img": "https://media.themoviedb.org/t/p/w300_and_h450_face/djHsJ1NxQl7htun7osNJXrUmazQ.jpg",
+    "imgBanner": "https://media.themoviedb.org/t/p/w1066_and_h600_face/rI9VPEw13XlVZzhOcLXt3Tiweyx.jpg",
+    "url": "https://morelda.github.io/bts/",
+    "year": "2026",
+    "etiquetas": [
+      "Música"
+    ],
+    "sinopsis": "Sigue a BTS mientras actúan en vivo desde Seúl en celebración de su quinto álbum de estudio Arirang, marcando su primer evento global con transmisión en vivo desde Corea.",
+    "enSlider": true
   }
 ]
